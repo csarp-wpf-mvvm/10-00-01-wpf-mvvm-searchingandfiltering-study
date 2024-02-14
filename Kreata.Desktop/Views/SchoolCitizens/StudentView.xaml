@@ -35,6 +35,11 @@
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">Diák adatok</Label>
         <!-- Keresés és szűrés fejléce -->
+        <Expander Grid.Row="1" Header="Szűrés és keresés">
+            <StackPanel Orientation="Horizontal">
+
+            </StackPanel>
+        </Expander>
         <!-- Form feliratok-->
         <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">Diák adatok</Label>
         <Label Grid.Row="2" Grid.Column="0">Vezeték név:</Label>
