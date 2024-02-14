@@ -7,8 +7,15 @@
              xmlns:local="clr-namespace:Kreta.Desktop.Views.SchoolCitizens"
              xmlns:viewModel="clr-namespace:Kreta.Desktop.ViewModels.SchoolCitizens"
              d:DataContext="{d:DesignInstance Type=viewModel:StudentViewModel, IsDesignTimeCreatable=True}"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             >
+    <d:DesignerProperties.DesignStyle>
+        <Style TargetType="UserControl">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Height" Value="700" />
+            <Setter Property="Width" Value="900" />
+        </Style>
+    </d:DesignerProperties.DesignStyle>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
