@@ -37,6 +37,7 @@ namespace Kreta.Desktop.ViewModels.SchoolCitizens
         }
         public uint FileteredMinBirthYear { get; set; } = 0;
         public uint FilteredMaxBirthYear { get; set; } = uint.MaxValue;
+        public string SerchedName { get; set; } = string.Empty;
 
         public StudentViewModel()
         {
@@ -92,12 +93,15 @@ namespace Kreta.Desktop.ViewModels.SchoolCitizens
             }
         }
 
-        private async Task UpdateView()
+        private async Task UpdateView(bool reloadData = true)
         {
             if (_studentService is not null)
             {
-                List<Student> students = await _studentService.SelectAllStudentAsync();
-                Students = new ObservableCollection<Student>(students);
+                if (reloadData)
+                {
+                    List<Student> students = await _studentService.SelectAllStudentAsync();
+                    Students = new ObservableCollection<Student>(students);
+                }
                 SetFilteredMinMaxYear();
             }
         }
@@ -106,6 +110,17 @@ namespace Kreta.Desktop.ViewModels.SchoolCitizens
         void DoNewStudent()
         {
             SelectedStudent = new Student();
+        }
+
+        [RelayCommand]
+        private async Task DoSearchingAndFiltering()
+        {
+            if (_studentService != null)
+            {
+                List<Student> students = await _studentService.SearchAndFilterStudents(this.ToStudentQueryParameters());
+                Students = new ObservableCollection<Student>(students);
+                await UpdateView(false);
+            }
         }
 
         private void SetFilteredMinMaxYear()
