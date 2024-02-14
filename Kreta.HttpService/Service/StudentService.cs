@@ -2,6 +2,7 @@
 using Kreta.Shared.Extensions;
 using Kreta.Shared.Models;
 using Kreta.Shared.Models.SchoolCitizens;
+using Kreta.Shared.Parameters;
 using Kreta.Shared.Responses;
 using Newtonsoft.Json;
 using System;
@@ -161,6 +162,36 @@ namespace Kreta.HttpService.Service
             }
             defaultResponse.ClearAndAddError("Az adatok mentése nem lehetséges!");
             return defaultResponse;
+        }
+
+        public async Task<List<Student>> SearchAndFilterStudents(StudentQueryParameters studentQueryParameters)
+        {
+            if (_httpClient is not null)
+            {
+                HttpResponseMessage? httpResponse = null;
+                try
+                {
+                    httpResponse = await _httpClient.PostAsJsonAsync("api/Student/queryparameters", studentQueryParameters.ToDto());
+                    if (httpResponse.IsSuccessStatusCode)
+                    {
+                        string content = await httpResponse.Content.ReadAsStringAsync();
+                        List<StudentDto>? students = JsonConvert.DeserializeObject<List<StudentDto>>(content);
+                        if (students is not null)
+                        {
+                            return students.Select(studentDto => studentDto.ToModel()).ToList();
+                        }
+                    }
+                    else if (!httpResponse.IsSuccessStatusCode)
+                    {
+                        httpResponse.EnsureSuccessStatusCode();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{ex.Message}");
+                }
+            }
+            return new List<Student>();
         }
     }
 }

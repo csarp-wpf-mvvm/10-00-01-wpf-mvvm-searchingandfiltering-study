@@ -20,8 +20,8 @@ namespace Kreta.Backend.Controllers
             this.repo = repo;
         }
 
-        [HttpPost("/queryparameters")]
-        public async Task<IActionResult> GetStudents([FromQuery] StudentQueryParametersDto dto)
+        [HttpPost("queryparameters")]
+        public async Task<IActionResult> GetStudents(StudentQueryParametersDto dto)
         {
             StudentQueryParameters parameters = dto.ToModel();
             if (!parameters.ValidYearRange)
