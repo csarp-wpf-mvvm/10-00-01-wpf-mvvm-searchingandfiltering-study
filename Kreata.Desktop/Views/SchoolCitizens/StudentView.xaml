@@ -40,9 +40,9 @@
                 <Label>Névrészlet:</Label>
                 <TextBox MinWidth="150"></TextBox>
                 <Label>Születési év kezdete:</Label>
-                <xwpftk:IntegerUpDown></xwpftk:IntegerUpDown>
+                <xwpftk:IntegerUpDown Value="{Binding FileteredMinBirthYear}"></xwpftk:IntegerUpDown>
                 <Label>és vége:</Label>
-                <xwpftk:IntegerUpDown></xwpftk:IntegerUpDown>
+                <xwpftk:IntegerUpDown Value="{Binding FilteredMaxBirthYear}"></xwpftk:IntegerUpDown>
                 <Label Margin="20 0 2 2">Nem</Label>
                 <CheckBox IsChecked="False" Margin="2 6 0 0"></CheckBox>
                 <RadioButton Margin="4 6 0 0">nő</RadioButton>

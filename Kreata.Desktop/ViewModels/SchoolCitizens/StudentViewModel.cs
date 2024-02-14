@@ -7,6 +7,8 @@ using Kreta.Desktop.ViewModels.Base;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Linq;
+using System;
 
 namespace Kreta.Desktop.ViewModels.SchoolCitizens
 {
@@ -33,6 +35,8 @@ namespace Kreta.Desktop.ViewModels.SchoolCitizens
                 SelectedStudent.EducationLevel = _selectedEducationLevel;
             }
         }
+        public uint FileteredMinBirthYear { get; set; } = 0;
+        public uint FilteredMaxBirthYear { get; set; } = uint.MaxValue;
 
         public StudentViewModel()
         {
@@ -94,6 +98,7 @@ namespace Kreta.Desktop.ViewModels.SchoolCitizens
             {
                 List<Student> students = await _studentService.SelectAllStudentAsync();
                 Students = new ObservableCollection<Student>(students);
+                SetFilteredMinMaxYear();
             }
         }
 
@@ -101,6 +106,19 @@ namespace Kreta.Desktop.ViewModels.SchoolCitizens
         void DoNewStudent()
         {
             SelectedStudent = new Student();
+        }
+
+        private void SetFilteredMinMaxYear()
+        {
+            if (Students is not null && Students.Any())
+            {
+                FileteredMinBirthYear = (uint)Students.ToList().Select(student => student.BirthDay.Year).Min();
+                FilteredMaxBirthYear = (uint)Students.ToList().Select(student => student.BirthDay.Year).Max();
+            }
+            else
+            {
+                FileteredMinBirthYear = FilteredMaxBirthYear = (uint)DateTime.Now.Year;
+            }
         }
     }
 }
