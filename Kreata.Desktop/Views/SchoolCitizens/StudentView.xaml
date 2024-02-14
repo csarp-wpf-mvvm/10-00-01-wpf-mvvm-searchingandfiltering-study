@@ -48,7 +48,7 @@
                 <RadioButton Margin="4 6 0 0">nő</RadioButton>
                 <RadioButton Margin="4 6 10 0">férfi</RadioButton>
                 <Button MinWidth="80" Margin="10 0 0 2" Command="{Binding DoSearchingAndFilteringCommand}">Szűrés</Button>
-                <Button MinWidth="80" Margin="3 0 10 2">Vissza</Button>
+                <Button MinWidth="80" Margin="3 0 10 2" Command="{Binding DoResetFilterAndSerachParameterCommand}">Vissza</Button>
             </StackPanel>
         </Expander>
         <!-- Form feliratok-->

@@ -123,6 +123,14 @@ namespace Kreta.Desktop.ViewModels.SchoolCitizens
             }
         }
 
+        [RelayCommand]
+        private async Task DoResetFilterAndSerachParameter()
+        {
+            SerchedName = string.Empty;
+            FileteredMinBirthYear = 0;
+            FilteredMaxBirthYear = uint.MaxValue;
+            await InitializeAsync();
+        }
         private void SetFilteredMinMaxYear()
         {
             if (Students is not null && Students.Any())
